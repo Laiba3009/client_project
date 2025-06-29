@@ -1,0 +1,12 @@
+[
+  {
+    "slug": "Furniture",
+    "title": "Furniture",
+    "price": 29.99,
+    "description": "The process of furniture manufacturing involves designing, cutting, shaping, joining, finishing, and assembling various materials such as wood, metal, plastic, and glass to create a final product that is both functional and aesthetically pleasing",
+    "category": "Clothing",
+    "images": ["/images/blue1.jpg", "/images/blue2.jpg"],
+    "extraImage": "/images/blue3.jpg",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+  }
+]
