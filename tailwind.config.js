@@ -1,3 +1,5 @@
+const { plugin } = require("postcss");
+
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
@@ -32,6 +34,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/line-clamp')],
-
+plugin:[],
 };

@@ -3,7 +3,7 @@ import ImageSlider from "./ImageSlider";
 import AddToCart from "./AddToCart";
 import TextSlider from "./TextSlider";
 import Accordion from "./Accordion";
-import FaShippingFast from "react-icons/fa";
+import {FaShippingFast} from "react-icons/fa";
 
 const ProductDetail = () => {
   const [product, setProduct] = useState(null);
