@@ -21,7 +21,7 @@ const features = [
   {
     icon: <FaUndoAlt className="text-4xl text-black mb-2" />,
     title: "14 Day Returns",
-    description: "Within 30 days for an exchange.",
+    description: "Within 30 days for an exchange",
   },
   {
     icon: <FaMoneyBillWave className="text-4xl text-black mb-2" />,
@@ -45,12 +45,12 @@ const cardVariants = {
 
 const FeatureHighlights = () => {
   return (
-    <section className="py-10 px-4 bg-gray-100">
-      <div className="max-w-7xl mx-auto flex flex-wrap justify-between text-center gap-y-10">
+    <section className="py-10 px-4 sm:px-6 md:px-8 bg-gray-100">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center">
         {features.map((feature, index) => (
           <motion.div
             key={index}
-            className="w-full sm:w-1/2 md:w-1/4 flex flex-col items-center px-4"
+            className="flex flex-col items-center px-2 sm:px-4"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.4 }}
@@ -58,8 +58,10 @@ const FeatureHighlights = () => {
             variants={cardVariants}
           >
             {feature.icon}
-            <h4 className="text-lg font-bold text-gray-800">{feature.title}</h4>
-            <p className="text-sm font-semibold text-gray-600 mt-1">
+            <h4 className="text-base sm:text-lg font-bold text-gray-800">
+              {feature.title}
+            </h4>
+            <p className="text-sm text-gray-600 mt-1 font-medium">
               {feature.description}
             </p>
           </motion.div>

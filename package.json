@@ -10,12 +10,15 @@
   "dependencies": {
     "@tailwindcss/line-clamp": "^0.4.4",
     "framer-motion": "^12.19.2",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.1",
     "keen-slider": "^6.8.6",
     "lucide-react": "^0.525.0",
     "react": "^18.2.0",
     "react-awesome-reveal": "^4.3.1",
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",
+    "react-intersection-observer": "^9.16.0",
     "react-router-dom": "^7.6.3",
     "typewriter-effect": "^2.22.0"
   },

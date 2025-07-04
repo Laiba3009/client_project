@@ -6,7 +6,14 @@
 
  body {
   font-family: 'Albert Sans', sans-serif;
-}
+  color: #ffffff;
+    padding: 10px;
+    margin: 0;
+    width: 100%;
+    overflow-x: hidden;
+    @apply m-0 p-0 box-border overflow-x-hidden;
+  }
+  
 
 /* === Typewriter Animation === */
 /* Typewriter Animation */

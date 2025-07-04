@@ -1,96 +1,150 @@
-import React, { useEffect, useState, useRef } from "react";
+ import React, { useEffect, useState, useRef } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
+import GuideImage from "./GuideImage";
 
-const StepItem = ({ step, index }) => {
+// Step Item
+const StepItem = ({ step, index, onVisibleChange, isVisible }) => {
   const ref = useRef();
-  const inView = useInView(ref, { threshold: 0.2 }); // triggers multiple times
+  const inView = useInView(ref, { threshold: 0.5 });
   const controls = useAnimation();
 
   useEffect(() => {
-    if (inView) {
-      controls.start("visible");
-    } else {
-      controls.start("hidden");
-    }
-  }, [inView, controls]);
-
-  // Animation configs
-  const textAnimation = {
-    hidden: { opacity: 0, x: index % 2 === 0 ? -60 : 60 },
-    visible: { opacity: 1, x: 0 },
-  };
+    onVisibleChange(index, inView);
+    if (inView) controls.start("visible");
+    else controls.start("hidden");
+  }, [inView, controls, index, onVisibleChange]);
 
   const imageAnimation = {
-    hidden: { opacity: 0, x: index % 2 === 0 ? 60 : -60 },
-    visible: { opacity: 1, x: 0 },
+    hidden: { opacity: 0, x: index % 2 === 0 ? -200 : 200 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.25, ease: "easeOut" },
+    },
+  };
+
+  const textAnimation = {
+    hidden: { opacity: 0, x: index % 2 === 0 ? 200 : -200 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.25, ease: "easeOut" },
+    },
   };
 
   return (
     <div
       ref={ref}
-      className="relative flex flex-col md:flex-row items-center gap-8 mb-16"
+      className="relative flex flex-col md:flex-row items-center gap-6 mb-20 z-20"
     >
-      {/* Vertical center line */}
-      <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-[#000000] z-0" />
+      {/* Step Number Circle (Only on md and above) */}
+      <div className="absolute left-1/2 top-10 transform -translate-x-1/2 z-30 hidden md:flex">
+        <motion.div
+          className="rounded-full bg-black font-bold flex items-center justify-center"
+          initial={{ scale: 1 }}
+          animate={{ scale: isVisible ? 1.4 : 0.8 }}
+          transition={{ duration: 0.3 }}
+          style={{
+            width: isVisible ? 28 : 20,
+            height: isVisible ? 28 : 20,
+            fontSize: "0.75rem",
+            color: "#B8860B",
+          }}
+        >
+          {index + 1}
+        </motion.div>
+      </div>
 
-      {/* Text Section */}
-      <motion.div
-        initial="hidden"
-        animate={controls}
-        variants={textAnimation}
-        transition={{ duration: 0.8 }}
-        className={`relative z-10 md:w-1/2 p-4 ${
-          index % 2 === 0 ? "order-1 md:order-1" : "order-1 md:order-2"
-        }`}
-      >
-        <h3 className="text-xl font-bold  mb-2">{step.title}</h3>
-        <p className="text-gray-700">{step.description}</p>
-      </motion.div>
-
-      {/* Image Section */}
+      {/* Image */}
       <motion.div
         initial="hidden"
         animate={controls}
         variants={imageAnimation}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className={`relative z-10 md:w-1/2 p-4 ${
-          index % 2 === 0 ? "order-2 md:order-2" : "order-2 md:order-1"
+        className={`relative z-20 w-full md:w-1/2 ${
+          index % 2 === 0 ? "order-1 md:order-1" : "order-1 md:order-2"
         }`}
       >
         <img
           src={step.image}
           alt={step.title}
-          className="rounded w-full shadow-md"
+          className="rounded w-full object-cover pr-4"
         />
+      </motion.div>
+
+      {/* Text */}
+      <motion.div
+        initial="hidden"
+        animate={controls}
+        variants={textAnimation}
+        className={`relative z-20 w-full md:w-1/2 ${
+          index % 2 === 0 ? "order-2 md:order-2" : "order-2 md:order-1"
+        }`}
+      >
+        <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 text-black leading-snug">
+          {step.title}
+        </h3>
+        <p className="text-md font- sm:text-2xl md:text-[22px] text-black leading-[1.3] px-3">
+  {step.description}
+    </p>
+
+
+        
       </motion.div>
     </div>
   );
 };
 
+// Main Component
 const StepTutorial = () => {
   const [steps, setSteps] = useState([]);
+  const [visibleSteps, setVisibleSteps] = useState({});
 
   useEffect(() => {
     fetch("/data/product.json")
       .then((res) => res.json())
       .then((data) => {
-        if (data.steps) {
-          setSteps(data.steps);
-        }
+        if (data.steps) setSteps(data.steps);
       });
   }, []);
 
-  return (
-    <section className="py-16 px-4  max-w-6xl mx-auto">
-      <h2 className="text-2xl py-16 md:text-3xl font-bold text-center mb-5">
-        Best Plants for Bedroom Setup Tutorial - Watch & Learn!
-      </h2>
+  const handleVisibleChange = (index, isVisible) => {
+    setVisibleSteps((prev) => {
+      if (prev[index] === isVisible) return prev;
+      return { ...prev, [index]: isVisible };
+    });
+  };
 
-      <div className="relative">
+  return (
+      <section className="pt-10 pb-0 sm:py-10 w-full max-w-6xl mx-auto px-4 sm:px-3 relative">
+
+      {/* Title with animation and spacing */}
+      <motion.h2
+        initial={{ y: -50, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        className="text-xl sm:text-3xl md:text-4xl font-jost text-center text-black  mb-10 sm:mb-5 "
+      >
+        Best Plants for Bedroom Setup Tutorial - Watch & Learn!
+      </motion.h2>
+
+      {/* Center Line (Desktop only) */}
+      <div className="absolute left-[calc(50%-1px)] top-[210px] bottom-[170px] w-[2px] bg-gray-300 z-0 hidden md:block" />
+
+
+      {/* Steps */}
+      <div className="relative z-20">
         {steps.map((step, index) => (
-          <StepItem key={index} step={step} index={index} />
+          <StepItem
+            key={index}
+            step={step}
+            index={index}
+            isVisible={visibleSteps[index] || false}
+            onVisibleChange={handleVisibleChange}
+          />
         ))}
       </div>
+      <GuideImage />
     </section>
   );
 };

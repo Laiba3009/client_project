@@ -11,17 +11,17 @@ const faqs = [
   {
     question: "What Makes the Hanging Bubble Chair So Popular?",
     answer:
-      "Its modern aesthetic, see-through acrylic design, and cozy feel make it a trending choice for both indoor and outdoor spaces. Plus, it pairs beautifully with minimal bamboo or wooden accents.",
+    "The hanging bubble chair stands out for its futuristic design and floating comfort. It adds a luxurious touch to both indoor and outdoor spaces. Especially when combined with bamboo swings, porch setups, or decorative items like bamboo wall hangings and artificial flower pots, it becomes a centerpiece. This chair blends perfectly with bamboo house styles and enhances the visual appeal of eco-friendly interiors",
   },
   {
     question: "Can I Buy a Porch Swing That Fits Small Lawns?",
     answer:
-      "Absolutely. Many compact and foldable porch swings are designed specifically for smaller outdoor spaces without sacrificing comfort or design.",
+    "Yes, compact porch swings are now widely available and are perfect for small patios, balconies, and limited garden areas. You can create a complete bamboo-inspired corner by pairing these swings with baby furniture sets, bamboo chairs and tables, or even lightweight outdoor flower pots. This not only saves space but also turns any corner into a peaceful, natural retreat using Eco Bamboo  elegant products.",
   },
   {
     question: "Is the Outdoor Hammock Chair Comfortable for Long Use?",
     answer:
-      "Yes! These chairs offer ergonomic support with breathable fabric, making them ideal for lounging long hours in your garden, patio, or balcony.",
+   "Definitely! Outdoor hammock chairs are built with ergonomic support and breathable materials, offering long-lasting comfort. Ideal for lounging under bamboo canopies or pergolas, they can be beautifully matched with bamboo carports, swings, and relaxing setups in your garden. Whether placed in a lawn or on a porch, this chair enhances both the comfort and the organic feel of your bamboo-themed outdoor living",
   },
 ];
 
@@ -33,37 +33,40 @@ const FAQSection = () => {
   };
 
   return (
-    <section className="max-w-4xl mx-auto py-16 px-4">
-      {/* Animated Title */}
+    <section className="w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
+      {/* Title */}
       <motion.h2
-        className="text-3xl font-bold text-center mb-10"
+        className="text-[22px] sm:text-[26px] md:text-[30px] font-bold text-center mb-8 text-gray-800"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.4 }}
         viewport={{ once: true }}
       >
         Everything You Need to Know
       </motion.h2>
 
+      {/* FAQ Items */}
       <div className="space-y-4">
         {faqs.map((faq, index) => (
           <div
             key={index}
-            className="border border-gray-300 rounded-md p-4 shadow-sm hover:shadow-md transition cursor-pointer"
             onClick={() => toggleFAQ(index)}
+            className="border border-gray-300 rounded-md p-4 sm:p-5 md:p-6 bg-white shadow-sm hover:shadow-md transition cursor-pointer"
           >
             <div className="flex justify-between items-center">
-              <p className="font-semibold text-base md:text-lg">{faq.question}</p>
+              <p className="font-semibold text-sm sm:text-base md:text-lg text-gray-800">
+                {faq.question}
+              </p>
 
               <motion.div
                 initial={false}
                 animate={{ rotate: openIndex === index ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.2 }}
               >
                 {openIndex === index ? (
-                  <FiMinus className="text-xl" />
+                  <FiMinus className="text-xl text-gray-600" />
                 ) : (
-                  <FiPlus className="text-xl" />
+                  <FiPlus className="text-xl text-gray-600" />
                 )}
               </motion.div>
             </div>
@@ -74,8 +77,8 @@ const FAQSection = () => {
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="mt-3 text-gray-700 text-sm leading-relaxed"
+                  transition={{ duration: 0.25 }}
+                  className="mt-3 text-gray-700 text-sm sm:text-base leading-relaxed"
                 >
                   {faq.answer}
                 </motion.div>

@@ -1,4 +1,6 @@
 import React, { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const VideoPlayer = () => {
   const iframeRef = useRef(null);
@@ -19,15 +21,27 @@ const VideoPlayer = () => {
     setIsMuted(!isMuted);
   };
 
+  // Track when title is in view
+  const { ref: titleRef, inView } = useInView({
+    triggerOnce: false, // true: animate once; false: animate every time it comes into view
+    threshold: 0.2, // 20% visible
+  });
+
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12 text-center">
-      {/* Title */}
-      <h2 className="text-[24px] md:text-[28px] font-bold text-[#000000] font-albert">
+    <div className="max-w-5xl mx-auto px-4 py-12 text-center">
+      {/* Title with Framer Motion animation */}
+      <motion.h2
+        ref={titleRef}
+        initial={{ opacity: 0, y: 30 }}
+        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="text-[24px] md:text-[28px] font-bold text-[#000000] font-dm"
+      >
         Best Plants for Bedroom Setup Tutorial – Watch & Learn!
-      </h2>
+      </motion.h2>
 
       {/* Down Arrow Icon */}
-      <div className="text-3xl mt-2 mb-6">⬇️</div>
+      <div className="text-3xl mt-5 mb-6 animate-bounce">⬇️</div>
 
       {/* Responsive YouTube Player */}
       <div

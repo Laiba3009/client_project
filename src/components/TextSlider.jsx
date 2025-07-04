@@ -1,4 +1,5 @@
 import React from "react";
+import "../style/TextSlider.css"; // ✅ Adjust the path if needed
 
 const TextSlider = () => {
   const textItems = [
@@ -12,23 +13,23 @@ const TextSlider = () => {
 
   const renderTextWithIcons = () =>
     textItems.map((text, index) => (
-      <React.Fragment key={index}>
-        <span className="px-2">{text}</span>
+      <div className="text-slide" key={index}>
+        <span>{text}</span>
         {index < textItems.length - 1 && (
           <img
             src="/images/s-shine.png"
             alt="shine"
-            className="w-4 h-5 inline-block mx-2"
+            className="icon"
           />
         )}
-      </React.Fragment>
+      </div>
     ));
 
   return (
-    <div className="w-full overflow-hidden bg-white py-2">
-      <div className="flex animate-marqueeRight whitespace-nowrap text-black text-base font-medium gap-10">
+    <div className="text-slider-wrapper">
+      <div className="text-slider-track">
         {renderTextWithIcons()}
-        {renderTextWithIcons()} {/* 👈 duplicate for seamless scroll */}
+        {renderTextWithIcons()} {/* 👈 Duplicate for smooth loop */}
       </div>
     </div>
   );
