@@ -54,12 +54,12 @@ const AddToCart = ({ product, selectedVariant }) => {
 
         {/* Add to Cart & Order Now Buttons */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
-          <button className="bg-black text-[#B8860B] py-3 px-4 rounded flex items-center justify-center gap-2 w-full transition-transform duration-200 hover:scale-105">
+          <button className="bg-black text-[#B8860B] py-3 px-4 hover:text-white rounded flex items-center justify-center gap-2 w-full transition-transform duration-200 hover:scale-105">
             <FaShoppingCart />
             Add to Cart
           </button>
 
-          <button className="border border-[#B8860B] bg-black text-[#B8860B] py-3 px-4 rounded flex items-center justify-center gap-2 w-full animate-float">
+          <button className="border border-[#B8860B] bg-black hover:text-white text-[#B8860B] py-3 px-4 rounded flex items-center justify-center gap-2 w-full animate-float">
             <FaShoppingBag />
             Order Now
           </button>
@@ -92,28 +92,63 @@ const AddToCart = ({ product, selectedVariant }) => {
             <FaTruck />
             Delivery & Return
           </button>
+          
+          <div className="relative">
+            <button
+              onClick={() => setShowShare(!showShare)}
+              className="flex items-center gap-2 p-2 text-black rounded-full hover:bg-gray-300"
+            >
+              <FaShareAlt />
+              <span>Share</span>
+            </button>
 
-          <div
-            className="relative group"
-            onMouseEnter={() => setShowShare(true)}
-            onMouseLeave={() => setShowShare(false)}
-          >
-          <button className="flex items-center gap-2 p-2 text-black  rounded-full">
-  <FaShareAlt />
-  <span>Share</span>
-</button>
             {showShare && (
-              <div className="absolute top-full right-0 mt-2 bg-black border shadow-md rounded-lg p-2 flex gap-2 z-50 text-sm">
-                <a href="#" className="text-white"><FaWhatsapp /></a>
-                <a href="#" className="text-white"><FaInstagram /></a>
-                <a href="#" className="text-[#B8860B]"><FaTiktok /></a>
-                <a href="#" className="text-white"><FaFacebookF /></a>
-                <a href="#" className="text-white"><FaYoutube /></a>
+              <div className="absolute top-full right-0 mt-2 bg-black border shadow-md rounded-lg p-3 flex gap-3 z-50 text-xl">
+                <a
+                  href="https://wa.me/message/K3SEED6UYIVCH1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-green-400"
+                >
+                  <FaWhatsapp />
+                </a>
+                <a
+                  href="https://www.instagram.com/ecobambo0?igsh=MWZ3Nmhzc3c2M29mZw=="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-pink-400"
+                >
+                  <FaInstagram />
+                </a>
+                <a
+                  href="https://www.tiktok.com/@ecobambo0?_t=ZS-8vPdrvheMRW&_r=1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#B8860B] hover:text-white"
+                >
+                  <FaTiktok />
+                </a>
+                <a
+                  href="https://www.facebook.com/share/18hBUYn5GD/?mibextid=wwXIfr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-blue-400"
+                >
+                  <FaFacebookF />
+                </a>
+                <a
+                  href="https://youtube.com/@ecobambo?si=8cnzITt5nm6X40tn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-red-500"
+                >
+                  <FaYoutube />
+                </a>
               </div>
             )}
           </div>
         </div>
-
+ 
         {/* Guarantee Safe Checkout */}
         <div className="flex flex-wrap items-center justify-between rounded-md px-4 py-3 mt-4 ">
           <div className="flex items-center gap-2">
@@ -172,7 +207,8 @@ const AddToCart = ({ product, selectedVariant }) => {
             </p>
           </div>
         </div>
-      )}
+      )
+      }
 
       {/* Delivery & Return Modal */}
       {policyOpen && (
